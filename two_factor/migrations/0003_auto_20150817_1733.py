@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 def migrate_phone_numbers(apps, schema_editor):
     PhoneDevice = apps.get_model("two_factor", "PhoneDevice")
     for device in PhoneDevice.objects.all():
-        username = device.user.get_username()
+        username = device.user.username
         try:
             number = phonenumbers.parse(device.number)
             if not phonenumbers.is_valid_number(number):
